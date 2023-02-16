@@ -6,7 +6,7 @@
   "types": "./index.d.ts",
   "license": "MIT",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && cp package.json ./dist/package.json",
     "test": "ava"
   },
   "dependencies": {
