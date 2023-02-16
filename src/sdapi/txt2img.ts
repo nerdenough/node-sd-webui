@@ -1,5 +1,3 @@
-import fetch from 'node-fetch'
-
 export type Txt2ImgOptions = {
   hires?: {
     steps: number
@@ -77,6 +75,7 @@ export const txt2img = async (
     }
   }
 
+  /* @ts-ignore */
   const result = await fetch(`${apiUrl}/sdapi/v1/txt2img`, {
     method: 'POST',
     body: JSON.stringify(body),

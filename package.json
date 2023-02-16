@@ -3,14 +3,14 @@
   "version": "0.0.4",
   "type": "module",
   "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "build:json": "json -f ./dist/package.json -I -e \"delete this.type; delete this.ava; delete this.devDependencies; delete this.scripts\"",
     "build:copy-files": "cp package.json ./dist/package.json &&  cp README.md ./dist/README.md && cp LICENSE ./dist/LICENSE",
     "build": "tsc --project tsconfig.esm.json & tsc --project tsconfig.cjs.json && pnpm run build:copy-files && pnpm run build:json",
     "test": "ava"
-  },
-  "dependencies": {
-    "node-fetch": "^3.3.0"
   },
   "devDependencies": {
     "@types/node": "^18.13.0",
