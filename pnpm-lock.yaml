@@ -4,6 +4,7 @@ specifiers:
   '@types/node': ^18.13.0
   '@types/sharp': ^0.31.1
   ava: ^5.2.0
+  json: ^11.0.0
   node-fetch: ^3.3.0
   sharp: ^0.31.3
   ts-node: ^10.9.1
@@ -16,6 +17,7 @@ devDependencies:
   '@types/node': 18.13.0
   '@types/sharp': 0.31.1
   ava: 5.2.0
+  json: 11.0.0
   sharp: 0.31.3
   ts-node: 10.9.1_4bewfcp2iebiwuold25d6rgcsy
   typescript: 4.9.5
@@ -779,6 +781,12 @@ packages:
     dependencies:
       argparse: 1.0.10
       esprima: 4.0.1
+    dev: true
+
+  /json/11.0.0:
+    resolution: {integrity: sha512-N/ITv3Yw9Za8cGxuQqSqrq6RHnlaHWZkAFavcfpH/R52522c26EbihMxnY7A1chxfXJ4d+cEFIsyTgfi9GihrA==}
+    engines: {node: '>=0.10.0'}
+    hasBin: true
     dev: true
 
   /load-json-file/7.0.1:

@@ -4,8 +4,9 @@
   "type": "module",
   "license": "MIT",
   "scripts": {
-    "build:copy-files": "cp package.json ./dist/package.json && cp README.md ./dist/README.md && cp LICENSE ./dist/LICENSE",
-    "build": "tsc --project tsconfig.esm.json & tsc --project tsconfig.cjs.json && pnpm run build:copy-files",
+    "build:json": "json -f ./dist/package.json -I -e \"delete this.type; delete this.ava; delete this.devDependencies; delete this.scripts\"",
+    "build:copy-files": "cp package.json ./dist/package.json &&  cp README.md ./dist/README.md && cp LICENSE ./dist/LICENSE",
+    "build": "tsc --project tsconfig.esm.json & tsc --project tsconfig.cjs.json && pnpm run build:copy-files && pnpm run build:json",
     "test": "ava"
   },
   "dependencies": {
@@ -15,6 +16,7 @@
     "@types/node": "^18.13.0",
     "@types/sharp": "^0.31.1",
     "ava": "^5.2.0",
+    "json": "^11.0.0",
     "sharp": "^0.31.3",
     "ts-node": "^10.9.1",
     "typescript": "^4.9.3"
@@ -27,7 +29,7 @@
       "--loader=ts-node/esm"
     ]
   },
-  "types": "types/index.d.ts",
+  "types": "./types/index.d.ts",
   "exports": {
     "import": "./esm/index.js",
     "require": "./cjs/index.js",
