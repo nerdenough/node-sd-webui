@@ -2,11 +2,10 @@
   "name": "node-sd-webui",
   "version": "0.0.1",
   "type": "module",
-  "module": "./index.js",
-  "types": "./index.d.ts",
   "license": "MIT",
   "scripts": {
-    "build": "tsc && cp package.json ./dist/package.json",
+    "build:copy-files": "cp package.json ./dist/package.json && cp README.md ./dist/README.md && cp LICENSE ./dist/LICENSE",
+    "build": "tsc --project tsconfig.esm.json & tsc --project tsconfig.cjs.json && pnpm run build:copy-files",
     "test": "ava"
   },
   "dependencies": {
@@ -27,5 +26,11 @@
     "nodeArguments": [
       "--loader=ts-node/esm"
     ]
+  },
+  "types": "types/index.d.ts",
+  "exports": {
+    "import": "./dist/esm/index.js",
+    "require": "./dist/cjs/index.js",
+    "default": "./dist/esm/index.js"
   }
 }
