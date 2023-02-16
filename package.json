@@ -29,8 +29,8 @@
   },
   "types": "types/index.d.ts",
   "exports": {
-    "import": "./dist/esm/index.js",
-    "require": "./dist/cjs/index.js",
-    "default": "./dist/esm/index.js"
+    "import": "./esm/index.js",
+    "require": "./cjs/index.js",
+    "default": "./esm/index.js"
   }
 }
