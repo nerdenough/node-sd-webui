@@ -69,7 +69,7 @@ sdwebui()
   })
   .then(({ images }) => {
     images.forEach((image, i) =>
-      imagwriteFileSync(`path/to/image-${i}.png`, images[i], 'base64')
+      writeFileSync(`path/to/image-${i}.png`, images[i], 'base64')
     )
   })
   .catch((err) => console.error(err))
