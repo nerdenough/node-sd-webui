@@ -1,6 +1,6 @@
 {
   "name": "node-sd-webui",
-  "version": "0.0.1-0",
+  "version": "0.0.1",
   "type": "module",
   "module": "./index.js",
   "types": "./index.d.ts",
