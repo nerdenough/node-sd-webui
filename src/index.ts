@@ -1,7 +1,7 @@
 import { img2img, Img2ImgOptions, Img2ImgResponse } from './sdapi/img2img.js'
 import { pngInfo, PngInfoOptions, PngInfoResponse } from './sdapi/pngInfo.js'
 import { txt2img, Txt2ImgOptions, Txt2ImgResponse } from './sdapi/txt2img.js'
-export * from './sdapi/types.js'
+export * from './types.js'
 
 type Props = {
   apiUrl?: string

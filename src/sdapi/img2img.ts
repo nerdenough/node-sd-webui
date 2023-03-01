@@ -1,3 +1,8 @@
+import {
+  ControlNetOptions,
+  mapControlNetOptions,
+} from '../extensions/controlNet/index.js'
+
 export type Img2ImgOptions = {
   imageData: string[]
   prompt: string
@@ -15,6 +20,9 @@ export type Img2ImgOptions = {
   steps?: number
   cfgScale?: number
   restoreFaces?: boolean
+  extensions?: {
+    controlNet?: ControlNetOptions[]
+  }
 }
 
 export type Img2ImgResponse = {
@@ -45,8 +53,18 @@ export const img2img = async (
     seed_resize_from_h: options.resizeSeedFromHeight,
   }
 
+  const { extensions } = options
+  if (extensions?.controlNet) {
+    body.controlnet_units = extensions.controlNet.map(mapControlNetOptions)
+  }
+
+  let endpoint = '/sdapi/v1/img2img'
+  if (options.extensions?.controlNet) {
+    endpoint = '/controlnet/img2img'
+  }
+
   /* @ts-ignore */
-  const result = await fetch(`${apiUrl}/sdapi/v1/img2img`, {
+  const result = await fetch(`${apiUrl}${endpoint}`, {
     method: 'POST',
     body: JSON.stringify(body),
     headers: {

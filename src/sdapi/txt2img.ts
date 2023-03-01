@@ -1,3 +1,8 @@
+import {
+  mapControlNetOptions,
+  ControlNetOptions,
+} from '../extensions/controlNet/index.js'
+
 export type Txt2ImgOptions = {
   hires?: {
     steps: number
@@ -35,6 +40,9 @@ export type Txt2ImgOptions = {
     name: string
     args?: string[]
   }
+  extensions?: {
+    controlNet?: ControlNetOptions[]
+  }
 }
 
 export type Txt2ImgResponse = {
@@ -43,10 +51,7 @@ export type Txt2ImgResponse = {
   info: string
 }
 
-export const txt2img = async (
-  options: Txt2ImgOptions,
-  apiUrl: string = 'http://localhost:7860'
-): Promise<Txt2ImgResponse> => {
+const mapTxt2ImgOptions = (options: Txt2ImgOptions) => {
   let body: any = {
     prompt: options.prompt,
     negative_prompt: options.negativePrompt,
@@ -85,8 +90,27 @@ export const txt2img = async (
     }
   }
 
+  const { extensions } = options
+  if (extensions?.controlNet) {
+    body.controlnet_units = extensions.controlNet.map(mapControlNetOptions)
+  }
+
+  return body
+}
+
+export const txt2img = async (
+  options: Txt2ImgOptions,
+  apiUrl: string = 'http://localhost:7860'
+): Promise<Txt2ImgResponse> => {
+  const body = mapTxt2ImgOptions(options)
+
+  let endpoint = '/sdapi/v1/txt2img'
+  if (options.extensions?.controlNet) {
+    endpoint = '/controlnet/txt2img'
+  }
+
   /* @ts-ignore */
-  const result = await fetch(`${apiUrl}/sdapi/v1/txt2img`, {
+  const result = await fetch(`${apiUrl}${endpoint}`, {
     method: 'POST',
     body: JSON.stringify(body),
     headers: {

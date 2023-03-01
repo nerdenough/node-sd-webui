@@ -1,8 +1,9 @@
 import test from 'ava'
 import { readFileSync } from 'fs'
+import { Preprocessor } from '../src/extensions/controlNet/index.js'
 import { img2img, Img2ImgOptions } from '../src/sdapi/img2img.js'
 import { pngInfo, PngInfoResponse } from '../src/sdapi/pngInfo.js'
-import { SamplingMethod } from '../src/sdapi/types.js'
+import { SamplingMethod } from '../src/types.js'
 
 const imageData = readFileSync('./test/images/mushroom.png', 'base64')
 
@@ -55,6 +56,28 @@ const testCases: TestCase[] = [
       },
     ],
   },
+  {
+    name: 'controlnet extension support',
+    options: {
+      imageData: [imageData],
+      prompt: 'A photo of a red mushroom',
+      steps: 20,
+      samplingMethod: SamplingMethod.LMS_Karras,
+      extensions: {
+        controlNet: [
+          {
+            inputImageData: imageData,
+            preprocessor: Preprocessor.Canny,
+            model: 'control_canny-fp16 [e3fe7712]',
+          },
+        ],
+      },
+    },
+    expected: [
+      { prompt: 'A photo of a red mushroom', width: 512, height: 512 },
+      {},
+    ],
+  },
 ]
 
 testCases.forEach((tc) =>
@@ -68,6 +91,10 @@ testCases.forEach((tc) =>
     t.is(result.images.length, tc.expected.length)
 
     for (let i = 0; i < result.images.length; i++) {
+      if (!Object.keys(tc.expected[i]).length) {
+        continue
+      }
+
       const imageData = result.images[i]
       const info = await pngInfo({
         imageData,

@@ -1,16 +1,30 @@
 # Node Stable Diffusion WebUI Client
 
-A Node.js client for using Automatic1111's Stable Diffusion WebUI.
+A Node.js client for using Automatic1111's Stable Diffusion Web UI.
 
 ## Current Features
 
-This project is a work in progress. The currently supported features are:
+This project is a work in progress. Current features include:
 
 - [x] txt2img generation
 - [x] img2img generation
 - [x] pngInfo support
 
-## Installation
+### Extensions
+
+- [x] ControlNet support both txt2img and img2img
+
+## Getting Started
+
+### Requirements
+
+- Node.js >= 18
+- Automatic1111's
+  [Stable Diffusion Web UI](https://github.com/AUTOMATIC1111/stable-diffusion-webui/)
+- ControlNet support requires
+  [sd-webui-controlnet](https://github.com/Mikubill/sd-webui-controlnet)
+
+### Installation
 
 Add `node-sd-webui` to your project.
 
