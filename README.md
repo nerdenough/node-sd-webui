@@ -1,5 +1,7 @@
 # Node Stable Diffusion Web UI Client
 
+[![npm version](https://badge.fury.io/js/node-sd-webui.svg)](https://www.npmjs.com/package/node-sd-webui)
+
 A Node.js client for using Automatic1111's Stable Diffusion Web UI.
 
 ## Current Features
