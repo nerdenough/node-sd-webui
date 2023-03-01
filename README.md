@@ -73,8 +73,10 @@ Another example with a few more options:
 import sdwebui, { SamplingMethod } from 'node-sd-webui'
 import { writeFileSync } from 'fs'
 
-sdwebui()
-  .txt2img({
+const client = sdwebui()
+
+try {
+  const { images } = await client.txt2img({
     prompt: 'A photo of a mushroom, red cap, white spots',
     negativePrompt: 'blurry, cartoon, drawing, illustration',
     samplingMethod: SamplingMethod.Euler_A,
@@ -83,10 +85,11 @@ sdwebui()
     steps: 20,
     batchSize: 5,
   })
-  .then(({ images }) => {
-    images.forEach((image, i) =>
-      writeFileSync(`path/to/image-${i}.png`, images[i], 'base64')
-    )
-  })
-  .catch((err) => console.error(err))
+
+  images.forEach((image, i) =>
+    writeFileSync(`path/to/image-${i}.png`, images[i], 'base64')
+  )
+} catch (err) {
+  console.error(err)
+}
 ```
