@@ -1,4 +1,4 @@
-# Node Stable Diffusion WebUI Client
+# Node Stable Diffusion Web UI Client
 
 A Node.js client for using Automatic1111's Stable Diffusion Web UI.
 

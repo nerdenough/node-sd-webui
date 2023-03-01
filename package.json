@@ -1,5 +1,6 @@
 {
   "name": "node-sd-webui",
+  "description": "Node.js client for AUTOMATIC1111's Stable Diffusion Web UI",
   "version": "0.0.7",
   "type": "module",
   "license": "MIT",
