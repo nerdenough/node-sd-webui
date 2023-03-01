@@ -1,12 +1,5 @@
-export type Txt2ImgOptions = {
-  hires?: {
-    steps: number
-    denoisingStrength: number
-    upscaler: string
-    upscaleBy?: number
-    resizeWidthTo?: number
-    resizeHeigthTo?: number
-  }
+export type Img2ImgOptions = {
+  imageData: string[]
   prompt: string
   negativePrompt?: string
   width?: number
@@ -22,32 +15,20 @@ export type Txt2ImgOptions = {
   steps?: number
   cfgScale?: number
   restoreFaces?: boolean
-  // tiling: false
-  // eta: 0
-  // s_churn: 0
-  // s_tmax: 0
-  // s_tmin: 0
-  // s_noise: 1
-  // override_settings: {}
-  // override_settings_restore_afterwards: true
-  // sampler_index: 'Euler'
-  script?: {
-    name: string
-    args?: string[]
-  }
 }
 
-export type Txt2ImgResponse = {
+export type Img2ImgResponse = {
   images: string[]
   parameters: object
   info: string
 }
 
-export const txt2img = async (
-  options: Txt2ImgOptions,
+export const img2img = async (
+  options: Img2ImgOptions,
   apiUrl: string = 'http://localhost:7860'
-): Promise<Txt2ImgResponse> => {
+): Promise<Img2ImgResponse> => {
   let body: any = {
+    init_images: options.imageData,
     prompt: options.prompt,
     negative_prompt: options.negativePrompt,
     seed: options.seed,
@@ -64,29 +45,8 @@ export const txt2img = async (
     seed_resize_from_h: options.resizeSeedFromHeight,
   }
 
-  if (options.hires) {
-    body = {
-      ...body,
-      enable_hr: true,
-      denoising_strength: options.hires.denoisingStrength,
-      hr_upscaler: options.hires.upscaler,
-      hr_scale: options.hires.upscaleBy,
-      hr_resize_x: options.hires.resizeWidthTo,
-      hr_resize_y: options.hires.resizeHeigthTo,
-      hr_second_pass_steps: options.hires.steps,
-    }
-  }
-
-  if (options.script) {
-    body = {
-      ...body,
-      script_name: options.script.name,
-      script_args: options.script.args || [],
-    }
-  }
-
   /* @ts-ignore */
-  const result = await fetch(`${apiUrl}/sdapi/v1/txt2img`, {
+  const result = await fetch(`${apiUrl}/sdapi/v1/img2img`, {
     method: 'POST',
     body: JSON.stringify(body),
     headers: {
@@ -103,5 +63,5 @@ export const txt2img = async (
     throw new Error('api returned an invalid response')
   }
 
-  return data as Txt2ImgResponse
+  return data as Img2ImgResponse
 }

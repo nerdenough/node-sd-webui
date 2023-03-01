@@ -6,7 +6,9 @@ A Node.js client for using Automatic1111's Stable Diffusion WebUI.
 
 This project is a work in progress. The currently supported features are:
 
-- txt2img generation
+- [x] txt2img generation
+- [x] img2img generation
+- [x] pngInfo support
 
 ## Installation
 
@@ -54,14 +56,14 @@ sdwebui()
 Another example with a few more options:
 
 ```js
-import sdwebui from 'node-sd-webui'
+import sdwebui, { SamplingMethod } from 'node-sd-webui'
 import { writeFileSync } from 'fs'
 
 sdwebui()
   .txt2img({
     prompt: 'A photo of a mushroom, red cap, white spots',
     negativePrompt: 'blurry, cartoon, drawing, illustration',
-    samplingMethod: 'DPM++ 2M Karras',
+    samplingMethod: SamplingMethod.Euler_A,
     width: 768,
     height: 512,
     steps: 20,

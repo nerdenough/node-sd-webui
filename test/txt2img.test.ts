@@ -1,14 +1,12 @@
 import test from 'ava'
-import sharp from 'sharp'
+import { pngInfo, PngInfoResponse } from '../src/sdapi/pngInfo.js'
 import { txt2img, Txt2ImgOptions } from '../src/sdapi/txt2img.js'
+import { SamplingMethod } from '../src/sdapi/types.js'
 
 type TestCase = {
   name: string
   options: Txt2ImgOptions
-  expected?: {
-    width?: number
-    height?: number
-  }[]
+  expected?: Partial<PngInfoResponse>[]
 }
 
 const testCases: TestCase[] = [
@@ -24,7 +22,7 @@ const testCases: TestCase[] = [
     options: {
       prompt: 'A photo of a mushroom, red cap, white spots',
       negativePrompt: 'blurry, cartoon, drawing, illustration',
-      samplingMethod: 'DPM++ 2M Karras',
+      samplingMethod: SamplingMethod.DPMPlusPlus_2M_Karras,
       width: 256,
       height: 256,
       steps: 20,
@@ -48,12 +46,11 @@ testCases.forEach((tc) =>
     t.is(result.images.length, tc.expected.length)
 
     for (let i = 0; i < result.images.length; i++) {
-      const image = result.images[i]
-      const { width, height } = await sharp(
-        Buffer.from(image, 'base64')
-      ).metadata()
-      t.is(width, tc.expected?.[i].width)
-      t.is(height, tc.expected?.[i].height)
+      const imageData = result.images[i]
+      const info = await pngInfo({ imageData })
+      Object.entries(tc.expected[i]).forEach(([key, value]) =>
+        t.is(info[key as keyof PngInfoResponse], value)
+      )
     }
   })
 )
