@@ -67,6 +67,7 @@ const mapTxt2ImgOptions = (options: Txt2ImgOptions) => {
     cfg_scale: options.cfgScale,
     seed_resize_from_w: options.resizeSeedFromWidth,
     seed_resize_from_h: options.resizeSeedFromHeight,
+    restore_faces: options.restoreFace,
   }
 
   if (options.hires) {
