@@ -43,6 +43,7 @@ const testCases: TestCase[] = [
       height: 256,
       steps: 20,
       cfgScale: 10,
+      restoreFaces: true,
     },
     expected: [
       {

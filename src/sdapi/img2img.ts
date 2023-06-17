@@ -51,6 +51,7 @@ export const img2img = async (
     cfg_scale: options.cfgScale,
     seed_resize_from_w: options.resizeSeedFromWidth,
     seed_resize_from_h: options.resizeSeedFromHeight,
+    restore_faces: options.restoreFaces,
   }
 
   const { extensions } = options

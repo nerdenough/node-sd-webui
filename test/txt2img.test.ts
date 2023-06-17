@@ -28,6 +28,7 @@ const testCases: TestCase[] = [
       height: 256,
       steps: 20,
       batchSize: 2,
+      restoreFaces: true,
     },
     expected: [
       {
