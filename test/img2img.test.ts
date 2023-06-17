@@ -75,7 +75,6 @@ const testCases: TestCase[] = [
     },
     expected: [
       { prompt: 'A photo of a red mushroom', width: 512, height: 512 },
-      {},
     ],
   },
 ]

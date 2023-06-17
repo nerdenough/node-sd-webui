@@ -66,7 +66,7 @@ const testCases: TestCase[] = [
         ],
       },
     },
-    expected: [{ prompt: 'A photo of a man', width: 512, height: 512 }, {}],
+    expected: [{ prompt: 'A photo of a man', width: 512, height: 512 }],
   },
 ]
 

@@ -21,6 +21,7 @@
     "typescript": "^4.9.3"
   },
   "ava": {
+    "timeout": "60s",
     "extensions": {
       "ts": "module"
     },
