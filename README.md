@@ -26,6 +26,23 @@ This project is a work in progress. Current features include:
 - ControlNet support requires
   [sd-webui-controlnet](https://github.com/Mikubill/sd-webui-controlnet)
 
+### Enable Stable Diffusion WebUI's API
+
+In order to use the API, you first need to enable it. You can do so by appending
+`--api` to the command line arguments when running the webui.
+
+For Linux: `[webui-folder]/webui-user.sh`
+
+```sh
+export COMMANDLINE_ARGS="--api"
+```
+
+For Windows: `[webui-folder]/webui-user.bat`
+
+```bat
+set COMMANDLINE_ARGS=--api
+```
+
 ### Installation
 
 Add `node-sd-webui` to your project.
