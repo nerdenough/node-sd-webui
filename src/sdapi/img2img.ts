@@ -64,7 +64,6 @@ export const img2img = async (
     endpoint = '/controlnet/img2img'
   }
 
-  /* @ts-ignore */
   const result = await fetch(`${apiUrl}${endpoint}`, {
     method: 'POST',
     body: JSON.stringify(body),
