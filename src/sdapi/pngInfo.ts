@@ -23,7 +23,6 @@ export const pngInfo = async (
     image: options.imageData,
   }
 
-  /* @ts-ignore */
   const result = await fetch(`${apiUrl}/sdapi/v1/png-info`, {
     method: 'POST',
     body: JSON.stringify(body),

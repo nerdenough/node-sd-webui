@@ -3,7 +3,13 @@ import { pngInfo, PngInfoOptions, PngInfoResponse } from './sdapi/pngInfo.js'
 import { txt2img, Txt2ImgOptions, Txt2ImgResponse } from './sdapi/txt2img.js'
 export * from './types.js'
 
-type Props = {
+export {
+    Img2ImgOptions, Img2ImgResponse,
+    PngInfoOptions, PngInfoResponse,
+    Txt2ImgOptions, Txt2ImgResponse,
+}
+
+export type ClientProps = {
   apiUrl?: string
 }
 
@@ -14,7 +20,7 @@ export type Client = {
   txt2img: (options: Txt2ImgOptions) => Promise<Txt2ImgResponse>
 }
 
-const sdwebui = (props?: Props): Client => {
+const sdwebui = (props?: ClientProps): Client => {
   const apiUrl = props?.apiUrl || 'http://localhost:7860'
 
   return {
